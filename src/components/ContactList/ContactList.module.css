@@ -1,0 +1,16 @@
+.contactsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.contactsList {
+    box-sizing: border-box;
+}
+
+.contactsList:not(:last-child) {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
