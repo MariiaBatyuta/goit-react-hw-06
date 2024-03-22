@@ -17,6 +17,18 @@ export default function ContactForm() {
         number: Yup.string().matches(/^\d{3}-\d{2}-\d{2}$/, 'Invalid phone number format').required("Required"),
     });
 
+    const handleInput = (e) => {
+        if (e.target.name !== `number`) return;
+
+        const number = e.target.value.replace(/\D/g, ``);
+
+        let validateNumber = number.slice(0, 3);
+        if (number.length > 3) validateNumber += "-" + number.slice(3, 5);
+        if (number.length > 5) validateNumber += "-" + number.slice(5, 7);
+
+        e.target.value = validateNumber;
+    }
+
     return (
         <div className={css.contactForm}>
             <Formik onSubmit={handleContact} initialValues={{ name: '', number: '' }} validationSchema={FeedbackSchema}>
@@ -33,6 +45,7 @@ export default function ContactForm() {
                         name="number"
                         placeholder="Enter the phone"
                         className={css.input}
+                        onInput={handleInput}
                     />
                     <span className={css.error}>
                         <ErrorMessage  name="number" />
